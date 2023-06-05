@@ -1,13 +1,12 @@
 const Pool = require('pg').Pool
 const pool = new Pool({
-  user: 'me',
+  user: 'postgres',
   host: 'localhost',
   database: 'api',
-  password: 'password',
+  password: 'Letsdoit!',
   port: 5432,
 })
 
-// get all users
 const getUsers = (request, response) => {
     pool.query('SELECT * FROM users ORDER BY id ASC', (error, results) => {
       if (error) {
@@ -16,8 +15,6 @@ const getUsers = (request, response) => {
       response.status(200).json(results.rows)
     })
   }
-
-  //get one user by ID
 
   const getUserById = (request, response) => {
     const id = parseInt(request.params.id)
@@ -30,8 +27,6 @@ const getUsers = (request, response) => {
     })
   }
 
-  // POST TO DATA BASE
-
   const createUser = (request, response) => {
     const { name, email } = request.body
   
@@ -42,8 +37,6 @@ const getUsers = (request, response) => {
       response.status(201).send(`User added with ID: ${results.rows[0].id}`)
     })
   }
-
-  //put or update the existing data 
 
   const updateUser = (request, response) => {
     const id = parseInt(request.params.id)
@@ -61,7 +54,6 @@ const getUsers = (request, response) => {
     )
   }
 
-  // deleting one existing data
   const deleteUser = (request, response) => {
     const id = parseInt(request.params.id)
   
@@ -73,17 +65,11 @@ const getUsers = (request, response) => {
     })
   }
 
-  
-
-  //export the queries so they can be accessed to the index file
-
-module.exports = {
+  module.exports = {
     getUsers,
     getUserById,
     createUser,
     updateUser,
     deleteUser,
   }
-
- 
 
