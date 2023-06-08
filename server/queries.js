@@ -31,9 +31,9 @@ const getUsers = (request, response) => {
   }
 
   const createUser = (request, response) => {
-    const { name, email } = request.body
+    const { firstName, lastName,idNumber, Gender,Email,Password,contactNumber,physicalAddress,postalCode,residenceAddress,taxNumber,basicMonthlyalary } = request.body
   
-    pool.query('INSERT INTO users (name, email) VALUES ($1, $2) RETURNING *', [name, email], (error, results) => {
+    pool.query('INSERT INTO users (firstName, lastName,idNumber, Gender,Email,Password,contactNumber,physicalAddress,postalCode,residenceAddress,taxNumber,basicMonthlyalary) VALUES ($1, $2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12) RETURNING *', [firstName, lastName,idNumber, Gender,Email,Password,contactNumber,physicalAddress,postalCode,residenceAddress,taxNumber,basicMonthlyalary], (error, results) => {
       if (error) {
         throw error
       }
@@ -43,11 +43,11 @@ const getUsers = (request, response) => {
 
   const updateUser = (request, response) => {
     const id = parseInt(request.params.id)
-    const { name, email } = request.body
+    const { firstName, lastName,idNumber, Gender,Email,Password,contactNumber,physicalAddress,postalCode,residenceAddress,taxNumber,basicMonthlyalary } = request.body
   
     pool.query(
-      'UPDATE users SET name = $1, email = $2 WHERE id = $3',
-      [name, email, id],
+      'UPDATE users SET name = $1, email = $2 ,id = $3',
+      [firstName, lastName,idNumber, Gender,Email,Password,contactNumber,physicalAddress,postalCode,residenceAddress,taxNumber,basicMonthlyalary, id],
       (error, results) => {
         if (error) {
           throw error
